@@ -29,7 +29,7 @@ export default function Chat() {
   }, [messages])
 
   return (
-    <Card className="w-3/12 shadow-xl bg-amaranth-500 text-slate-50 rounded-lg">
+    <Card className="w-3/12 shadow-xl bg-amaranth-500 text-slate-50 rounded-lg lg:w-10/12 xl:w-6/12 sm:w-11/12">
       <CardHeader className="bg-amaranth-600 rounded-t-lg">
         <CardTitle>AI Chatbot</CardTitle>
         <CardDescription className="text-slate-200">
