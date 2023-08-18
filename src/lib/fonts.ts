@@ -1,4 +1,4 @@
-import { Saira_Condensed as FontMono } from 'next/font/google'
+import { Saira as FontMono } from 'next/font/google'
 
 export const fontMono = FontMono({
   subsets: ['latin'],

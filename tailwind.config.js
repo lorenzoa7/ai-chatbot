@@ -20,6 +20,19 @@ module.exports = {
     },
     extend: {
       colors: {
+        amaranth: {
+          50: '#fef2f3',
+          100: '#fee2e4',
+          200: '#fecacd',
+          300: '#fba6ac',
+          400: '#f7727b',
+          500: '#ee4550',
+          600: '#db2733',
+          700: '#b81d27',
+          800: '#981c24',
+          900: '#7e1e24',
+          950: '#450a0e',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
