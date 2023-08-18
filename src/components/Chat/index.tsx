@@ -9,6 +9,7 @@ import {
     CardTitle,
 } from '@/components/ui/card'
 import { useChat } from 'ai/react'
+import { useEffect, useRef } from 'react'
 import { IoMdSend } from 'react-icons/io'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
@@ -17,6 +18,16 @@ import { ScrollArea } from '../ui/scroll-area'
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat()
+  const container = useRef<HTMLDivElement>(null)
+
+  const scroll = () => {
+    container.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    scroll()
+  }, [messages])
+
   return (
     <Card className="w-3/12 shadow-xl bg-amaranth-500 text-slate-50 rounded-lg">
       <CardHeader className="bg-amaranth-600 rounded-t-lg">
@@ -26,7 +37,7 @@ export default function Chat() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[640px] space-y-4 pr-4">
+        <ScrollArea className="h-[640px] space-y-4 pr-4 mt-5">
           {messages.length < 1 && (
             <div className="flex items-center justify-center">
               <span className="bg-amaranth-600/70 w-fit rounded-lg p-2 ">
@@ -36,8 +47,9 @@ export default function Chat() {
           )}
           {messages.map((message) => (
             <div
+              data-user={message.role === 'user'}
               key={message.id}
-              className="flex justify-end gap-2 text-slate-50 mb-4"
+              className="flex justify-start gap-2 text-slate-50 mb-4 data-[user=true]:justify-end"
             >
               {message.role === 'user' && (
                 <Avatar className="order-last">
@@ -92,6 +104,7 @@ export default function Chat() {
               delectus illo. Temporibus rerum quaerat quia quisquam.
             </p>
           </div> */}
+          <div ref={container} />
         </ScrollArea>
       </CardContent>
       <CardFooter>
