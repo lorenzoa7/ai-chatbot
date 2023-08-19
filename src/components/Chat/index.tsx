@@ -37,7 +37,7 @@ export default function Chat() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[640px] space-y-4 pr-4 mt-5">
+        <ScrollArea className="h-[640px] lg:h-[640px] sm:h-[450px] 2xl:h-[450px] space-y-4 pr-4 mt-5">
           {messages.length < 1 && (
             <div className="flex items-center justify-center">
               <span className="bg-amaranth-600/70 w-fit rounded-lg p-2 ">
