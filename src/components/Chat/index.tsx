@@ -11,18 +11,20 @@ import {
 import { useChat } from 'ai/react'
 import { useEffect, useRef } from 'react'
 import { IoMdSend } from 'react-icons/io'
+import { ScaleLoader } from 'react-spinners'
 import TextArea from 'react-textarea-autosize'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { ScrollArea } from '../ui/scroll-area'
 
 export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat()
-  const container = useRef<HTMLDivElement>(null)
+  const { messages, input, handleInputChange, handleSubmit, isLoading } =
+    useChat()
+  const scrollDownRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
 
   const scroll = () => {
-    container.current?.scrollIntoView({ behavior: 'smooth' })
+    scrollDownRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
   useEffect(() => {
@@ -75,7 +77,7 @@ export default function Chat() {
             </div>
           ))}
 
-          <div ref={container} />
+          <div ref={scrollDownRef} />
         </ScrollArea>
       </CardContent>
       <CardFooter className="absolute bottom-0 w-full">
@@ -94,19 +96,21 @@ export default function Chat() {
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault()
-                formRef?.current?.requestSubmit()
+                if (input.length > 1 && !isLoading)
+                  formRef.current?.requestSubmit()
               }
             }}
             className="flex h-10 w-full bg-amaranth-50 border-amaranth-300 text-slate-900 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
           />
 
           <Button
-            data-disabled={input.length < 1}
+            disabled={input.length < 1 || isLoading}
             size="icon"
             type="submit"
-            className="bg-amaranth-900 hover:bg-amaranth-950 data-[disabled=true]:bg-transparent data-[disabled=true]:text-white/30 data-[disabled=true]:pointer-events-none"
+            className="bg-amaranth-900 hover:bg-amaranth-950 disabled:bg-transparent disabled:text-white/40 disabled:pointer-events-none disabled:opacity-100"
           >
-            <IoMdSend size={20} />
+            {isLoading && <ScaleLoader color="white" width={2} height={15} />}
+            {!isLoading && <IoMdSend size={20} />}
           </Button>
         </form>
       </CardFooter>
