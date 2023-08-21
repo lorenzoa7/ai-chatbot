@@ -19,6 +19,7 @@ import { ScrollArea } from '../ui/scroll-area'
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat()
   const container = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const scroll = () => {
     container.current?.scrollIntoView({ behavior: 'smooth' })
@@ -78,7 +79,11 @@ export default function Chat() {
         </ScrollArea>
       </CardContent>
       <CardFooter className="absolute bottom-0 w-full">
-        <form className="flex items-end gap-2 w-full" onSubmit={handleSubmit}>
+        <form
+          ref={formRef}
+          className="flex items-end gap-2 w-full"
+          onSubmit={handleSubmit}
+        >
           <TextArea
             rows={2}
             maxRows={6}
@@ -86,6 +91,12 @@ export default function Chat() {
             placeholder="Send a message"
             value={input}
             onChange={handleInputChange}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault()
+                formRef?.current?.requestSubmit()
+              }
+            }}
             className="flex h-10 w-full bg-amaranth-50 border-amaranth-300 text-slate-900 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
           />
 
