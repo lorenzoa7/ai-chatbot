@@ -11,9 +11,9 @@ import {
 import { useChat } from 'ai/react'
 import { useEffect, useRef } from 'react'
 import { IoMdSend } from 'react-icons/io'
+import TextArea from 'react-textarea-autosize'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
-import { Input } from '../ui/input'
 import { ScrollArea } from '../ui/scroll-area'
 
 export default function Chat() {
@@ -29,7 +29,7 @@ export default function Chat() {
   }, [messages])
 
   return (
-    <Card className="w-3/12 shadow-xl bg-amaranth-500 text-slate-50 rounded-lg lg:w-10/12 xl:w-6/12 sm:w-11/12">
+    <Card className="relative w-3/12 shadow-xl bg-amaranth-500 text-slate-50 rounded-lg lg:w-10/12 xl:w-6/12 sm:w-11/12">
       <CardHeader className="bg-amaranth-600 rounded-t-lg">
         <CardTitle>AI Chatbot</CardTitle>
         <CardDescription className="text-slate-200">
@@ -37,7 +37,7 @@ export default function Chat() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[640px] lg:h-[640px] sm:h-[450px] 2xl:h-[450px] space-y-4 pr-4 mt-5">
+        <ScrollArea className="h-[640px] lg:h-[640px] sm:h-[450px] 2xl:h-[450px] space-y-4 pr-4 mt-5 mb-14">
           {messages.length < 1 && (
             <div className="flex items-center justify-center">
               <span className="bg-amaranth-600/70 w-fit rounded-lg p-2 ">
@@ -74,47 +74,21 @@ export default function Chat() {
             </div>
           ))}
 
-          {/* <div className="flex justify-end gap-2 text-slate-50 mb-4">
-            <Avatar className="order-last">
-              <AvatarFallback>H</AvatarFallback>
-              <AvatarImage src="/human.png"></AvatarImage>
-            </Avatar>
-            <p className="leading-relaxed bg-amaranth-800 p-3 rounded-l-lg rounded-b-lg mt-2">
-              What is your name?
-            </p>
-          </div>
-
-          <div className="flex gap-2 text-slate-50 mb-4">
-            <Avatar>
-              <AvatarFallback>H</AvatarFallback>
-              <AvatarImage src="/robot.png"></AvatarImage>
-            </Avatar>
-
-            <p className="leading-relaxed bg-amaranth-800 p-3 rounded-r-lg rounded-b-lg mt-2">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam
-              magnam velit nostrum voluptates, aut amet. Voluptatum velit
-              corporis architecto eum labore maxime repudiandae, ex aperiam
-              ducimus temporibus esse, nisi beatae! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Soluta, sed! Quae architecto
-              aspernatur ullam odio est dolores nam sequi odit! Delectus, alias?
-              Voluptate, quod excepturi esse perferendis voluptatibus quia
-              corporis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequatur consequuntur perferendis eum suscipit vitae ipsam
-              corporis, quam tempore ratione maiores harum libero voluptatibus
-              delectus illo. Temporibus rerum quaerat quia quisquam.
-            </p>
-          </div> */}
           <div ref={container} />
         </ScrollArea>
       </CardContent>
-      <CardFooter>
-        <form className="flex gap-2 w-full" onSubmit={handleSubmit}>
-          <Input
+      <CardFooter className="absolute bottom-0 w-full">
+        <form className="flex items-end gap-2 w-full" onSubmit={handleSubmit}>
+          <TextArea
+            rows={2}
+            maxRows={6}
+            autoFocus
             placeholder="Send a message"
             value={input}
             onChange={handleInputChange}
-            className="bg-amaranth-50 border-amaranth-300 text-slate-900"
+            className="flex h-10 w-full bg-amaranth-50 border-amaranth-300 text-slate-900 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
           />
+
           <Button
             data-disabled={input.length < 1}
             size="icon"
