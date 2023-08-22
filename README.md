@@ -24,7 +24,7 @@
 
 - Built with the help of shadcn components
 - Streaming messages
-- Route handler for OpenAPI API
+- Route handler for OpenAI API
 - Auto resizable input
 - Loading state to prevent request submission while streaming messages
 
