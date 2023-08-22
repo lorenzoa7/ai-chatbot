@@ -1,4 +1,4 @@
-# 🤖 <a href="https://couple-wheel.vercel.app/">AI Chatbot</a></h1>
+# 🤖 <a href="https://lorenzoa7-ai-chatbot.vercel.app/">AI Chatbot</a></h1>
 
 
 
@@ -18,7 +18,7 @@
 <p>AI Chatbot is a simple, but effective, AI-powered companion that talks to you about everything, using the power of OpenAI API and Vercel SDK!</p>
 
 
-<a href="https://couple-wheel.vercel.app/">App Preview</a>
+<a href="https://lorenzoa7-ai-chatbot.vercel.app/">App Preview</a>
 
 ## 🌟 Features
 
