@@ -15,7 +15,7 @@
 
 
 ## 📑 About
-<p>AI Chatbot is a simple, but effective, AI-powered companion that talks to you about everything, using the power of OpenAI API and Vercel SDK!</p>
+<p>AI Chatbot is a simple, but effective, AI-powered companion that talks to you about anything, using the power of OpenAI API and Vercel SDK!</p>
 
 
 <a href="https://lorenzoa7-ai-chatbot.vercel.app/">App Preview</a>
